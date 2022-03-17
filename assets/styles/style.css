@@ -1,0 +1,34 @@
+/* colorscheme #16697A #489FB5 #82C0CC #EDE7E3 #FFA62B */
+
+h1 {
+    padding-top: 7rem;
+    padding-bottom: 2rem;
+    font-weight: bold;
+}
+
+h2 {
+    padding-top: 7%;
+}
+
+/* classes */
+.col {
+    text-align: center;
+}
+.row {
+    text-align: center;
+}
+
+
+/* grades */
+#grades {
+    padding: 7% 5%;
+}
+
+#grades img {
+    padding: 2rem;
+}
+
+#downloads {
+    padding: 7% 5%;
+}
+

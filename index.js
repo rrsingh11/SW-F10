@@ -1,4 +1,6 @@
 const PORT = 3002;
+let RESULT = false
+let isPending = false
 //importing dependencies
 const express = require("express");
 const path = require("path");
@@ -21,13 +23,15 @@ const storage = multer.diskStorage({
     cb(null, Date.now() + path.extname(file.originalname));
   },
 });
-const upload = multer({ storage: storage });
-console.log("upload: ", upload);
 
+const upload = multer({ storage: storage });
+
+//middleware------------------
 app.use("/assets", express.static(path.join(__dirname, "assets")));
 app.use(express.json());
 app.set("view engine", "ejs");
 
+//routes-starting-------------
 //home route
 app.get("/", (req, res) => {
   res.status(200).render("home");
@@ -48,10 +52,23 @@ app.get("/task", (req, res) => {
 
 //uploading the image
 app.post("/upload", upload.single("image"), (req, res) => {
-  res.status(200).render("task", {
-    upload: "image uploaded and its underprocess",
-  });
+  if(!RESULT){
+    return res.status(200).render("task", {
+      upload: "image uploaded and its underprocess",
+      });
+  }else{
+    RESULT = null
+    return res.status(200).render('result')
+  }
+  
+
 });
+
+//result route
+
+app.get('/result',(req, res)=>{
+  res.status(200).render('result')
+})
 
 //sending pdf to the user
 app.get("/pdf", (req, res) => {
