@@ -21,13 +21,22 @@
             
             <div>
                 <form action="/upload" method="post" enctype="multipart/form-data">
-                    <input type="file" accept="images/jpeg" name="image">
-                </div>
-                <button>Less Go</button>
-            </form>
-            
+                    <input type="file" accept="images/*" name="image">
+                    </div>
+                    <button type="submit">Less Go</button>
+                </form>
+                <p><%= upload %> </p>
+                <a href="/pdf">download</a>
              </div>
         </section>
     </main>
 </body>
 </html>
+<!-- <form action="/upload" method="post" enctype="multipart/form-data">
+        
+    <input type="file" name = 'image' />
+    <input type="submit">
+
+    <a href="/pdf">download</a>
+
+</form> -->
