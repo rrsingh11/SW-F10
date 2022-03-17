@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Upload Page</title>
 
    <link rel="preconnect" href="https://fonts.googleapis.com">
-   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link href="https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@700&display=swap" rel="stylesheet">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/assets/styles/main.css">
@@ -15,15 +15,19 @@
 <body>
     <main id="task">
         <section id="container">
+            <h2 class="hd">Write this text or upload your own</h2>
             <div class="tb">
                 <h2>One day, a zebra found a xylophone on the sidewalk. He quickly ran over, picked it up, and gave it to his pet mule. Just then, he found another xylophone. He kept that one for himself.</h2>
             </div>
             
             <div>
                 <form action="/upload" method="post" enctype="multipart/form-data">
-                    <input type="file" accept="images/*" name="image" class="in">
+                    <label class="ctu">
+                        <span class="upbt">  <img class="img" src="/assets/upload.gif" alt=""> UPLOAD</span>
+                        <input type="file" accept="images/*" name="image" class="in">
+                    </label>
                     </div>
-                    <button class="gs" type="submit"><span class="button_top">Less Go</span> </button>
+                    <button class="gs lg" type="submit"><span class="button_top">Lets Go</span> </button>
                 </form>
             </div>
         </section>
