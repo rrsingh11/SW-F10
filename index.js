@@ -1,11 +1,20 @@
 const PORT = 3002;
-let RESULT = false
-let isPending = false
+let pdfName = ''
+let filename = ''
+let jsonData = null
+let grade=''
+let url = ''
+let message = ''
+let keys = ''
 //importing dependencies
 const express = require("express");
 const path = require("path");
 const fs = require("fs");
-// const ejs = require('ejs')
+const {spawn} = require('child_process');
+
+//pdf merger
+const PDFMerger = require('pdf-merger-js');
+
 
 //initializing the app
 const app = express();
@@ -13,14 +22,18 @@ const app = express();
 //initializing the multer
 const multer = require("multer");
 
+// initializing the pdf merger
+var merger = new PDFMerger();
+
+
 //configuring the multer storage
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     cb(null, "upload_images");
   },
   filename: (req, file, cb) => {
-    console.log(file);
-    cb(null, Date.now() + path.extname(file.originalname));
+    filename = file.originalname;
+    cb(null, file.originalname);
   },
 });
 
@@ -44,25 +57,45 @@ app.get("/task", (req, res) => {
   });
 });
 
-// app.get('/upload', (req, res)=>{
-//     res.render('upload',{
-//         title : "srm"
-//     });
-// })
-
 //uploading the image
 app.post("/upload", upload.single("image"), (req, res) => {
-  if(!RESULT){
-    return res.status(200).render("task", {
-      upload: "image uploaded and its underprocess",
-      });
-  }else{
-    RESULT = null
-    return res.status(200).render('result')
-  }
-  
+  let dataToSend = ''
+  console.log(filename);
+    const python = spawn('python', ['script01.py', filename ]);
+    python.stdout.on('data', function (data) {
+      console.log('Pipe data from python script ...');
+      jsonData = JSON.parse(data);
+        });
+     
+     // in close event we are sure that stream from child process is closed
+     python.on('close', (code) => {
+     console.log(`child process close all stdio with code ${code}`);
+     // send data to browser
+      filename=''
+      grade = jsonData['grade'];
+      message = jsonData['message']
+      delete jsonData.grade;
+      delete jsonData.message;
+      url = `./assets/images/${grade}-grade.png`
 
+      //making the pdf
+      keys = Object.keys(jsonData)
+      len = keys.length
+      for(i=0;i<len;i++){
+        merger.add(`./assets/example/${keys[i]}.pdf`);
+        pdfName = pdfName + `${keys[i]}`
+      }
+      (async () => {
+        await merger.save(`${pdfName}.pdf`); //save under given name and reset the internal document
+      })();
+      res.status(200).render('result',{
+        url : url,
+        message : message,
+        keys: keys
+      })
+     });
 });
+
 
 //result route
 
@@ -72,14 +105,15 @@ app.get('/result',(req, res)=>{
 
 //sending pdf to the user
 app.get("/pdf", (req, res) => {
-  var data = fs.readFileSync("./assets/example/write.pdf");
+  var data = fs.readFileSync(`${pdfName}.pdf`);
   res.contentType("application/pdf");
+  pdfName='';
   res.send(data);
 });
 
 //other routes sending error 404 page
 app.use("*", (req, res) => {
-  res.send("page not found");
+  res.status(404).render('404');
 });
 
 app.listen(PORT, () => {

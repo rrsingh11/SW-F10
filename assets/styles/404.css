@@ -1,32 +1,31 @@
-/* colorscheme #16697A #489FB5 #82C0CC #EDE7E3 #FFA62B */
-
-body {
-    background-image: url("http://localhost:3002/assets/another%20grid%20opacity.png");
-    background-size: cover;
-    backdrop-filter: blur(0.15rem);
+/* body { */
+/*     background-image: url("/home/antimony2k/code/sih/images/another grid opacity.png"); */
+/*     background-size: cover; */
+/*     backdrop-filter: blur(0.15rem); */
+/* } */
+div {
+    text-align: center;
 }
 
-h1 {
-    padding-top: 7rem;
-    padding-bottom: 2rem;
+    h1 {
+    padding-bottom: 0.2em;
+    font-family: 'Poppins', sans-serif;
     font-weight: bold;
-    font-family: 'Cabin Sketch', cursive;
-    font-size: 6rem;
 }
 
-h2 {
-    padding-top: 7%;
+p {
+    padding-bottom: 2rem;
     font-family: 'Poppins', sans-serif;
 }
 
+img {
+    width: 25%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8rem;
+}
 
-/* classes */
-.col {
-    text-align: center;
-}
-.row {
-    text-align: center;
-}
 
 /* From cssbuttons.io by @Voxybuns */
 button {
@@ -62,19 +61,3 @@ button:active .button_top {
   /* Push the button downwards when pressed */
  transform: translateY(0);
 }
-
-/* grades */
-#grades {
-    padding: 7% 5%;
-}
-
-#grades img {
-    padding: 2rem;
-}
-
-#downloads {
-    padding: 7% 5%;
-}
-
-
-
