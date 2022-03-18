@@ -41,17 +41,50 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+/*NAVIGATION*/
 
-main{
+.navbar {
+    padding-left: 30%;
+    border-bottom: 1px solid #e7e7e7;
+    border-top: 1px solid #e7e7e7;
+    margin-bottom: 0;
+    margin-top: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+    /* background-color: rgba(255, 206, 133, 0.3) */
+    
+}
+ul{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    list-style: none;
+}
+li a{ 
+    text-decoration: none;
+    color: #000000;
+    font-size: 1.5rem;
+    font-family:  'Cabin Sketch', cursive;
+}
+
+
+
+
+
+
+
+
+/*MAin*/
+body{
     background: url(https://4.bp.blogspot.com/-sA2ZM0-oR4E/Uh9hoE_6qZI/AAAAAAAAEwg/GV740FLO7s4/s1600/Background-Grid2.jpg) no-repeat;
     background-size: 100% 100%;
+    background-color: rgba(230, 247, 255, 0.4);
+    backdrop-filter: blur(3px);
 }
 #home{
     width: 100vw;
     height: 100vh;
-    background-color: rgba(230, 247, 255, 0.4);
     display: flex;
-    backdrop-filter: blur(3px);
     flex-direction: column;
     align-items: center;
     justify-content: center;
@@ -79,7 +112,7 @@ main{
    background: var(--button_outline_color);
   }
   
-  .button_top {
+  .bt {
    display: block;
    box-sizing: border-box;
    border: 2px solid var(--button_outline_color);
@@ -91,11 +124,11 @@ main{
    transition: transform 0.1s ease;
   }
   
-  button:hover .button_top {
+  .gs:hover .bt {
    transform: translateY(-0.33em);
   }
   
-  button:active .button_top {
+  .gs:active .bt {
    transform: translateY(0);
   }
 
@@ -179,3 +212,16 @@ span{
     align-items: center;
 
 }
+/* 
+#about{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.hero{
+    width: 50%;
+    height: 80%;
+} */
